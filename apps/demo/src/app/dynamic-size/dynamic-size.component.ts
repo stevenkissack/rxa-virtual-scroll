@@ -37,6 +37,8 @@ import { DataService, Item } from '../data.service';
           <div
             class="item"
             [style.height.px]="itemSize(item)"
+            [class.expanded]="expanded === item.id"
+            ng-click="setExpanded(item.id)"
             *rxVirtualFor="
               let item of state.items$;
               renderCallback: state.renderCallback$;
@@ -92,6 +94,10 @@ import { DataService, Item } from '../data.service';
 })
 export class DynamicSizeComponent {
   itemSize = (item: Item) => (item.description ? 120 : 50);
+  expanded = null;
+  setExpanded = (id: number) => {
+    this.expanded = id;
+  };
 
   constructor(public state: DemoComponentState) {}
 }
